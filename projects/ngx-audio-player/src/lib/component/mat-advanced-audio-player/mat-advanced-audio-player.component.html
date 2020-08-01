@@ -3,6 +3,17 @@
 
     <audio #audioPlayer [src]="currentTrack?.link"></audio>
 
+    <button (click)='repeatTheSong();' [disabled]="loaderDisplay" class="p-1" mat-button>
+        <mat-icon aria-hidden="true">
+            <!-- repeat song -->
+            <!-- <svg height="32" viewBox="0 0 24 24" width="32" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z" />
+                <path d="M0 0h32v32H0z" fill="none" />
+            </svg> -->
+            autorenew
+        </mat-icon>
+    </button>
+
     <button (click)='previousSong();' [disabled]="loaderDisplay" class="p-1" mat-button>
         <mat-icon aria-hidden="true">
             <!-- Skip previous icon (skip_previous) -->

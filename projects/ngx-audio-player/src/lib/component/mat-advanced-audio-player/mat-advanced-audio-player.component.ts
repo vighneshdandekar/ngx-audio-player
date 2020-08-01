@@ -167,4 +167,8 @@ export class MatAdvancedAudioPlayerComponent extends BaseAudioPlayerFunctions im
         this.audioPlayerService.setCurrentTrack(this.currentTrack);
     }
 
+    repeatTheSong(): void {
+        console.error('u just call repeat the song function')
+    }
+
 }
