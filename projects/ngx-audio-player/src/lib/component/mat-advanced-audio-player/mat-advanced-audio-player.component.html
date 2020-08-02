@@ -3,7 +3,7 @@
 
     <audio #audioPlayer [src]="currentTrack?.link"></audio>
 
-    <button (click)='repeatTheSong();' [disabled]="loaderDisplay" class="p-1" mat-button>
+    <button (click)='setRepatFlag()' [disabled]="loaderDisplay" class="p-1" mat-button>
         <mat-icon aria-hidden="true">
             <!-- repeat song -->
             <!-- <svg height="32" viewBox="0 0 24 24" width="32" xmlns="http://www.w3.org/2000/svg">

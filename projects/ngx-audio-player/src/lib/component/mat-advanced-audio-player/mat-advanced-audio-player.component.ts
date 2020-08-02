@@ -50,6 +50,7 @@ export class MatAdvancedAudioPlayerComponent extends BaseAudioPlayerFunctions im
     currentTrack: Track;
     private previousTrack: Track;
     private nextTrack: Track;
+    private repeatIt: boolean = false;
 
     ngOnInit() {
 
@@ -74,7 +75,12 @@ export class MatAdvancedAudioPlayerComponent extends BaseAudioPlayerFunctions im
 
         // auto play next track
         this.player.nativeElement.addEventListener('ended', () => {
-            this.nextSong();
+            console.log('end reached', this.repeatIt)
+            if (this.repeatIt) {
+                this.repeatSong()
+            } else {
+                this.nextSong();
+            }
         });
 
         this.player.nativeElement.addEventListener('timeupdate', () => {
@@ -111,6 +117,8 @@ export class MatAdvancedAudioPlayerComponent extends BaseAudioPlayerFunctions im
         }
         this.currentTime = 0;
         this.duration = 0.01;
+        this.repeatIt = false;
+
         if ((this.currentIndex + 1) >= this.tracks.length) {
             this.currentIndex = 0;
         } else {
@@ -123,6 +131,8 @@ export class MatAdvancedAudioPlayerComponent extends BaseAudioPlayerFunctions im
     previousSong(): void {
         this.currentTime = 0;
         this.duration = 0.01;
+        this.repeatIt = false;
+
         if (!this.checkIfSongHasStartedSinceAtleastTwoSeconds()) {
             if (this.displayPlaylist === true
                 && (((this.currentIndex) % this.paginator.pageSize) === 0
@@ -167,8 +177,20 @@ export class MatAdvancedAudioPlayerComponent extends BaseAudioPlayerFunctions im
         this.audioPlayerService.setCurrentTrack(this.currentTrack);
     }
 
-    repeatTheSong(): void {
-        console.error('u just call repeat the song function')
+    repeatSong(): void {
+        console.log('u just call repeat the song function')
+        this.repeatIt = true
+        this.currentTime = 0;
+        this.duration = 0.01;
+        this.resetSong()
+
+        this.updateCurrentSong();
+
+        this.play(this.currentTrack);
+    }
+
+    setRepatFlag() {
+        this.repeatIt = !this.repeatIt
     }
 
 }
